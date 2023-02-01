@@ -12,6 +12,8 @@ export default {
     searchedBucketList: [],
     allBucketListTotalPageValue: 0,
     bucketListToTalPageByCategory: 0,
-    myBucketListTotalPage: 0
+    myBucketListTotalPage: 0,
+    searchBucketListTotalPageValue: 0,
+
 
 }

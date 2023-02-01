@@ -15,7 +15,7 @@ public class MemberTestCase {
 
     @Test
     public void memberSignUpTest() {
-        MemberSignUpRequest request = new MemberSignUpRequest("sss@naver.com", "123415", "nickname");
+        MemberSignUpRequest request = new MemberSignUpRequest("nnn@naver.com", "nnnn", "nnnn");
         boolean checkSignUp = service.signUp(request);
 
         System.out.println(checkSignUp);
@@ -31,7 +31,7 @@ public class MemberTestCase {
 
     @Test
     public void memberSignInTest() {
-        MemberSignInRequest request = new MemberSignInRequest("sss@naver.com", "123415");
+        MemberSignInRequest request = new MemberSignInRequest("nnn@naver.com", "nnnn");
         String token = service.signIn(request);
 
         System.out.println(token);

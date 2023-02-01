@@ -35,4 +35,11 @@ public class PageServiceImpl implements PageService{
 
         return bucketBoardPageByUserNickname.getTotalPages();
     }
+
+    @Override
+    public int getTotalPageBySearchBucket(String searchWord) {
+        Page<BucketBoard> bucketBoardPageBySearchBucket = bucketBoardRepository.findByBucketTitleContaining(searchWord, PageRequest.of(0, 12));
+
+        return bucketBoardPageBySearchBucket.getTotalPages();
+    }
 }

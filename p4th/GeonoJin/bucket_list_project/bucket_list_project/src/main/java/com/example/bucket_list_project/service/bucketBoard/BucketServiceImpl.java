@@ -5,6 +5,7 @@ import com.example.bucket_list_project.entity.Board.ImgFile;
 import com.example.bucket_list_project.repository.bucketBoard.BucketBoardRepository;
 import com.example.bucket_list_project.repository.bucketBoard.ImgFileRepository;
 import com.example.bucket_list_project.service.bucketBoard.request.bucketBoard.BucketBoardRequest;
+import com.example.bucket_list_project.service.bucketBoard.request.bucketBoard.SearchBucketListRequest;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -155,9 +156,15 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-    public List<BucketBoard> bucketLIstSearch(String searchWord) {
-        log.info("bucketLIstSearch" + searchWord);
+    public List<BucketBoard> bucketLIstSearch(SearchBucketListRequest searchBucketListRequest) {
+        log.info("bucketLIstSearch");
 
-        return bucketBoardRepository.findByBucketTitleContaining(searchWord);
+        String searchWord = searchBucketListRequest.getSearchWord();
+        int pageValue = (searchBucketListRequest.getPageValue() - 1);
+
+        Page<BucketBoard> searchBucketBoardPage = bucketBoardRepository.findByBucketTitleContaining(searchWord, PageRequest.of(pageValue, 12, Sort.by("bucketId").descending()));
+        List<BucketBoard> searchBucketList = searchBucketBoardPage.getContent();
+
+        return searchBucketList;
     }
 }

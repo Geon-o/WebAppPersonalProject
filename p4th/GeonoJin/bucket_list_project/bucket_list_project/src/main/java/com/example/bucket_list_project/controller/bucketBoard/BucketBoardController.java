@@ -6,6 +6,7 @@ import com.example.bucket_list_project.service.bucketBoard.BucketService;
 import com.example.bucket_list_project.service.bucketBoard.request.bucketBoard.BucketBoardRequest;
 import com.example.bucket_list_project.service.bucketBoard.request.bucketBoard.BucketListByUserNicknamePerPageRequest;
 import com.example.bucket_list_project.service.bucketBoard.request.bucketBoard.BucketListCategoryByPageRequest;
+import com.example.bucket_list_project.service.bucketBoard.request.bucketBoard.SearchBucketListRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -96,10 +97,10 @@ public class BucketBoardController {
         return service.findBucketListByUserNickname(userNickname, currentPage);
     }
 
-    @GetMapping("/search/{searchWord}")
-    public List<BucketBoard> bucketListSearch(@PathVariable("searchWord") String searchWord) {
-        log.info("bucketListSearch" + searchWord);
+    @PostMapping("/search")
+    public List<BucketBoard> bucketListSearch(@RequestBody SearchBucketListRequest searchBucketListRequest) {
+        log.info("bucketListSearch");
 
-        return service.bucketLIstSearch(searchWord);
+        return service.bucketLIstSearch(searchBucketListRequest);
     }
 }

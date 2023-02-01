@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.redis.core.convert.Bucket;
 
 import java.util.List;
@@ -97,7 +98,8 @@ public class BucketBoardTest {
 
     @Test
     public void searchByBucketTitle(){
-        List<BucketBoard> searchBucketTitle = bucketBoardRepository.findByBucketTitleContaining("일상");
+        Page<BucketBoard> searchBucket = bucketBoardRepository.findByBucketTitleContaining("일상", PageRequest.of(0, 12, Sort.by("bucketId").descending()));
+        List<BucketBoard> searchBucketTitle = searchBucket.getContent();
 
         System.out.println(searchBucketTitle);
     }

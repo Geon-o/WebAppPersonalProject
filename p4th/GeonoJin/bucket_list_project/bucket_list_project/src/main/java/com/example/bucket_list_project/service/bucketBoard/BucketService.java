@@ -3,6 +3,7 @@ package com.example.bucket_list_project.service.bucketBoard;
 import com.example.bucket_list_project.entity.Board.BucketBoard;
 import com.example.bucket_list_project.entity.Board.ImgFile;
 import com.example.bucket_list_project.service.bucketBoard.request.bucketBoard.BucketBoardRequest;
+import com.example.bucket_list_project.service.bucketBoard.request.bucketBoard.SearchBucketListRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,5 +26,5 @@ public interface BucketService {
     public List<BucketBoard> findBucketListByCategory(String bucketCategory, int currentPage);
     public List<BucketBoard> findBucketListByUserNickname(String userNickname, int currentPage);
 
-    public List<BucketBoard> bucketLIstSearch(String searchWord);
+    public List<BucketBoard> bucketLIstSearch(SearchBucketListRequest searchBucketListRequest);
 }

@@ -10,7 +10,8 @@ import {
     REQUEST_SEARCH_BUCKET_LIST_TO_SPRING,
     REQUEST_ALL_BUCKET_LIST_TOTAL_PAGE_FROM_SPRING,
     REQUEST_BUCKET_LIST_TOTAL_PAGE_BY_CATEGORY_FROM_SPRING,
-    REQUEST_BUCKET_LIST_BY_CURRENT_USER_NICKNAME_PER_PAGE_FROM_SPRING
+    REQUEST_BUCKET_LIST_BY_CURRENT_USER_NICKNAME_PER_PAGE_FROM_SPRING,
+    REQUEST_SEARCH_BUCKET_LIST_TOTAL_PAGE_FROM_SPRING
 } from './mutation-types'
 
 import axios from "axios";
@@ -58,11 +59,11 @@ export default {
         axios.post("http://localhost:7777/member/sign-up", {
             email, password, nickName
         })
-            .then((res) => {
-                alert("회원 가입 완료!" + res)
+            .then(() => {
+                alert("회원 가입 완료!")
             })
-            .catch((res) => {
-                alert("회원가입 실패" + res)
+            .catch(() => {
+                alert("회원가입 실패")
             })
 
     },
@@ -183,9 +184,9 @@ export default {
             });
     },
     async requestSearchBucketListToSpring({ commit }, payload) {
-        const searchWord = payload
+        const {searchWord, pageValue} = payload
 
-        await axios.get(`http://localhost:7777/bucket/search/${searchWord}`)
+        await axios.post("http://localhost:7777/bucket/search",{searchWord, pageValue})
             .then((res) => {
                 commit(REQUEST_SEARCH_BUCKET_LIST_TO_SPRING, res.data)
             });
@@ -216,6 +217,15 @@ export default {
             .then((res) => {
                 commit(REQUEST_BUCKET_LIST_BY_CURRENT_USER_NICKNAME_PER_PAGE_FROM_SPRING, res.data);
             });
+    },
+    async requestSearchBucketListTotalPageFromSpring({commit}, payload) {
+        const searchWord = payload
+
+        await axios.post(`http://localhost:7777/page/search-bucket-list-total-page/${searchWord}`)
+            .then((res) => {
+                commit(REQUEST_SEARCH_BUCKET_LIST_TOTAL_PAGE_FROM_SPRING, res.data);
+            });
+
     },
 
 }

@@ -1,11 +1,15 @@
 <template>
-  <search-form :buckets="searchedBucketList" @search="searching"/>
+  <search-form :buckets="searchedBucketList"
+               @search="searching"
+               :totalPage="searchBucketListTotalPageValue"
+  />
 </template>
 
 <script>
 
 import SearchForm from "@/components/search/SearchForm";
 import {mapActions, mapState} from "vuex";
+
 export default {
   name: "SearchView",
   components: {
@@ -13,16 +17,19 @@ export default {
   },
   computed: {
     ...mapState([
-      'searchedBucketList'
+      'searchedBucketList',
+      'searchBucketListTotalPageValue'
     ]),
   },
-  methods:{
+  methods: {
     ...mapActions([
-        'requestSearchBucketListToSpring'
+      'requestSearchBucketListToSpring',
+      'requestSearchBucketListTotalPageFromSpring'
     ]),
-    async searching(payload){
-      const searchWord = payload
-      await this.requestSearchBucketListToSpring(searchWord)
+    async searching(payload) {
+      const {searchWord, pageValue} = payload
+      await this.requestSearchBucketListToSpring({searchWord, pageValue})
+      await this.requestSearchBucketListTotalPageFromSpring(searchWord);
     }
   }
 

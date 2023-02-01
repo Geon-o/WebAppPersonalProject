@@ -187,6 +187,7 @@ export default {
       } else {
         this.checkNicknameValue = true;
         this.alertMessage = "입력한 닉네임과 일치하지 않습니다."
+        this.alertWarning = false
       }
     },
     deleteUserInfo(){

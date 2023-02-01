@@ -19,7 +19,8 @@
               <v-list width="180px" height="180px">
                 <v-list-item>
                   <v-list-item-title>
-                    <v-btn  color="white" rounded elevation="0" :to="{name: 'MyPageView', params: {nickName: nickName}}">
+                    <v-btn  color="white" rounded elevation="0" :to="{name: 'MyPageView', params: {nickName: nickName}}"
+                    style="margin-top: 30px">
                       <h4>{{ nickName }}</h4>
                       <v-icon style="margin-bottom: 5px">mdi-home</v-icon>
                     </v-btn>

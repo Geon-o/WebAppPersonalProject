@@ -35,4 +35,11 @@ public class PageController {
 
         return pageService.getTotalPageByMyBucket(userNickname);
     }
+
+    @PostMapping("/search-bucket-list-total-page/{searchWord}")
+    public int getTotalPageBySearchBucket(@PathVariable("searchWord") String searchWord) {
+        log.info("getTotalPageBySearchBucket" + searchWord);
+
+        return pageService.getTotalPageBySearchBucket(searchWord);
+    }
 }

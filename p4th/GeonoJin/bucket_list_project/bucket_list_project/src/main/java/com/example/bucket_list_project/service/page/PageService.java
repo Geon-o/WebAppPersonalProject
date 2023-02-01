@@ -9,4 +9,6 @@ public interface PageService {
     public int getTotalPageByCategory(String categoryName);
 
     public int getTotalPageByMyBucket(String userNickname);
+
+    public int getTotalPageBySearchBucket(String searchWord);
 }

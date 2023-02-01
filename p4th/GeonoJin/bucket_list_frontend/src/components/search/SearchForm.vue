@@ -48,11 +48,21 @@
         </v-row>
       </div>
     </v-layout>
+    <template>
+      <div class="text-center">
+        <v-pagination
+            v-model="pageValue"
+            :length="totalPage"
+            @input="paging"
+        ></v-pagination>
+      </div>
+    </template>
   </v-container>
 </template>
 
 <script>
 import ToolBarComponent from "@/components/common/ToolBarComponent";
+import {mapActions} from "vuex";
 
 export default {
   name: "SearchForm",
@@ -60,16 +70,28 @@ export default {
   props: {
     buckets: {
       type: Array
+    },
+    totalPage:{
+      type: Number
     }
   },
   data(){
     return{
-      searchWord: ''
+      searchWord: '',
+      pageValue: 1
     }
   },
   methods:{
+    ...mapActions([
+       'requestSearchBucketListToSpring'
+    ]),
     onSearch(){
-      this.$emit('search', this.searchWord)
+      const {searchWord, pageValue} = this
+      this.$emit('search', {searchWord, pageValue})
+    },
+    async paging(){
+      const {searchWord, pageValue} = this
+      await this.requestSearchBucketListToSpring({searchWord, pageValue});
     }
   }
 }
